@@ -24,6 +24,3 @@ yarn-error.log
 /.zed
 /database/database.sqlite
 *.sqlite
-
-
-/dataset/*.csv
