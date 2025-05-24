@@ -152,7 +152,7 @@ export default function Home() {
                                 </div>
 
                                 {/* Điểm khối A */}
-                                {student.toan && student.vat_li && student.hoa_hoc && (
+                                {student.toan !== null && student.vat_li !== null && student.hoa_hoc !== null && (
                                     <div className="mt-4 bg-blue-100 p-3 rounded">
                                         <span className="font-medium">Tổng điểm khối A:</span>{' '}
                                         {(student.toan + student.vat_li + student.hoa_hoc).toFixed(2)}
