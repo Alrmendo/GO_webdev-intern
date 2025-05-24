@@ -13,8 +13,11 @@ fi
 # Run migrations
 php artisan migrate --force
 
-# Import student data from CSV
-php artisan import:student-data
+# Import student data from CSV (only if enabled via env var)
+if [ "${IMPORT_DATA:-false}" = "true" ]; then
+    echo "Importing student data..."
+    php artisan import:student-data || echo "Import failed, continuing with startup..."
+fi
 
 # Start Apache
 exec apache2-foreground 
