@@ -96,14 +96,14 @@ export default function TopKhoiA() {
                                                 <div className="text-center">{student.toan}</div>
                                                 <div className="text-center">{student.vat_li}</div>
                                                 <div className="text-center">{student.hoa_hoc}</div>
-                                                <div className="text-center text-lg font-bold text-blue-600">{student.tong_khoi_a.toFixed(2)}</div>
+                                                <div className="text-center text-lg font-bold text-blue-600">{Number(student.tong_khoi_a).toFixed(2)}</div>
                                             </div>
 
                                             {/* Mobile reponsive */}
                                             <div className="p-4 md:hidden">
                                                 <div className="mb-2 flex items-center justify-between">
                                                     <div className="text-lg font-bold">{getRankMedal(rank)}</div>
-                                                    <div className="text-lg font-bold text-blue-600">{student.tong_khoi_a.toFixed(2)} điểm</div>
+                                                    <div className="text-lg font-bold text-blue-600">{Number(student.tong_khoi_a).toFixed(2)} điểm</div>
                                                 </div>
                                                 <div className="mb-2">
                                                     <span className="font-medium">SBD:</span> {student.sbd}
