@@ -7,7 +7,7 @@ Hệ thống web tra cứu và thống kê điểm thi Trung học phổ thông 
 ## Demo
 
 - **Live Demo**: [Sẽ cập nhật sau khi deploy]
-- **Video Demo**: [Sẽ cập nhật]
+- **Video Demo**: [G-Scores](https://youtu.be/PW4PnGVG1mg)
 
 ## Cài đặt và chạy local
 
