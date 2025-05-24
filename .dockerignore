@@ -3,7 +3,6 @@ vendor
 .git
 .env
 .env.local
-.env.example
 storage/logs/*
 storage/app/*
 storage/framework/cache/*

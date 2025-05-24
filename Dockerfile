@@ -33,7 +33,11 @@ WORKDIR /var/www/html
 COPY . .
 
 # Create temporary .env for building
-RUN cp .env.example .env
+RUN echo "APP_NAME=Laravel" > .env && \
+    echo "APP_ENV=production" >> .env && \
+    echo "APP_KEY=" >> .env && \
+    echo "APP_DEBUG=false" >> .env && \
+    echo "DB_CONNECTION=pgsql" >> .env
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
