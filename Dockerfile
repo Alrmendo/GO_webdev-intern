@@ -23,26 +23,29 @@ RUN docker-php-ext-install pdo_pgsql pgsql mbstring exif pcntl bcmath gd
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Allow Composer to run as superuser
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy composer files
-COPY composer.json composer.lock ./
+# Copy application code first
+COPY . .
+
+# Create temporary .env for building
+RUN cp .env.example .env
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-
-# Copy package files
-COPY package*.json ./
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 # Install Node dependencies
 RUN npm ci
 
-# Copy application code
-COPY . .
-
 # Build assets
 RUN npm run build
+
+# Run Laravel package discovery
+RUN php artisan package:discover --ansi
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
@@ -56,6 +59,9 @@ RUN a2enmod rewrite
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# Generate a temporary APP_KEY for caching
+RUN php artisan key:generate
 
 # Cache configuration
 RUN php artisan config:cache && \
