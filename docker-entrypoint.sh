@@ -13,8 +13,8 @@ fi
 # Run migrations
 php artisan migrate --force
 
-# Import sample data (only run if table is empty)
-php artisan db:seed --class=StudentScoreSeeder
+# Import student data from CSV
+php artisan import:student-data
 
 # Start Apache
 exec apache2-foreground 
